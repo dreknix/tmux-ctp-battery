@@ -100,7 +100,7 @@ battery_percentage_sysfs() {
 }
 
 battery_status() {
-  backend="$(get_tmux_option '@battery_backend' 'none')"
+  backend="$(get_tmux_option '@battery_backend' 'auto')"
   case "$backend" in
     acpi)
       battery_status_acpi
@@ -120,7 +120,7 @@ battery_status() {
     upower)
       battery_status_upower
       ;;
-    none)
+    auto)
       if command_exists "pmset"; then
         battery_status_pmset
       elif command_exists "acpi"; then
@@ -142,7 +142,7 @@ battery_status() {
 }
 
 battery_percentage() {
-  backend="$(get_tmux_option '@battery_backend' 'none')"
+  backend="$(get_tmux_option '@battery_backend' 'auto')"
   case "$backend" in
     acpi)
       battery_percentage_acpi
@@ -162,7 +162,7 @@ battery_percentage() {
     upower)
       battery_percentage_upower
       ;;
-    none)
+    auto)
       if command_exists "pmset"; then
         battery_percentage_pmset
       elif command_exists "acpi"; then
